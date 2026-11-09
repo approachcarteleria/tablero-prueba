@@ -4,7 +4,7 @@
 <!-- Tablero de producción · página para GitHub Pages. Desarrollado por Bruno Sanz. -->
 <script>
   // ▼ Dirección de la aplicación web de Apps Script (termina en /exec). Es lo único que hay que tocar.
-  window.API_URL = "https://script.google.com/macros/s/AKfycbxCs-z7xfRPRPZwGharYclxESriziHmSSpO-TR5MH5IEdPI-QgxOF7H3vaCbhnPt3yiOg/exec";
+  window.API_URL = "PEGAR_ACA_LA_URL_DE_LA_APLICACION_WEB";
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
@@ -2391,6 +2391,150 @@ if (token) load(); else mostrarLogin();
     call("guardarViaje", d).then(function(r){ $("#dlg-vj").close(); aplicar(r); }, function(er){ $("#vj-err").textContent = (er && er.message || "").replace(/^.*(PERMISO|Error):\s*/, ""); })
       .then(function(){ $("#vj-save").disabled = false; $("#vj-save").textContent = "Guardar y calcular ruta"; });
   });
+})();
+</script>
+
+
+<style>
+#lp-btn{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:center;gap:10px;
+  background:var(--ink);color:#fff;border:0;border-radius:999px;padding:12px 20px 12px 14px;font:700 20px var(--f-display);text-transform:uppercase;letter-spacing:.06em;cursor:pointer;box-shadow:0 8px 24px rgb(0 0 0/.25)}
+#lp-btn .ic{width:34px;height:34px;border-radius:50%;background:#19B3A6;display:grid;place-items:center}
+#lp-btn:focus-visible{outline:3px solid #19B3A6;outline-offset:3px}
+body.pantalla #lp-btn{display:none}
+#lp{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:61;width:min(430px,calc(100vw - 24px));height:min(640px,calc(100vh - 36px));
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 60px rgb(0 0 0/.3);display:flex;flex-direction:column;overflow:hidden}
+@media (max-width:600px){#lp{right:0;left:0;bottom:0;width:100%;height:88vh;border-radius:18px 18px 0 0}}
+.lp-h{display:flex;align-items:center;gap:10px;padding:14px 14px 12px 16px;border-bottom:1px solid var(--line)}
+.lp-h b{font:800 26px var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.lp-h small{font:500 12px var(--f-mono);color:var(--muted)}
+.lp-h .sp{flex:1}
+.lp-h button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:6px 10px;font:600 15px var(--f-body);cursor:pointer;color:var(--ink)}
+.lp-h button[aria-pressed="false"]{opacity:.5}
+#lp-chat{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.lp-m{max-width:88%;padding:10px 13px;border-radius:14px;font-size:16px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
+.lp-m.yo{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:4px}
+.lp-m.ella{align-self:flex-start;background:var(--soft);border-bottom-left-radius:4px}
+.lp-m.err{align-self:flex-start;background:#fff1ec;color:#9a3412}
+.lp-us{align-self:flex-start;font:500 12px var(--f-mono);color:var(--muted);margin:-4px 0 0 4px}
+.lp-conf{align-self:stretch;border:2px solid #19B3A6;border-radius:12px;padding:12px;display:grid;gap:10px;background:color-mix(in srgb,#19B3A6 8%,var(--panel))}
+.lp-conf p{margin:0;font-weight:600;font-size:16px}
+.lp-conf div{display:flex;gap:8px}
+.lp-conf button{flex:1;border:0;border-radius:9px;padding:12px;font:700 18px var(--f-display);text-transform:uppercase;letter-spacing:.05em;cursor:pointer}
+.lp-conf .si{background:#19B3A6;color:#fff} .lp-conf .no{background:var(--chip);color:var(--ink)}
+.lp-conf.hecho{opacity:.55}
+.lp-sug{display:flex;flex-wrap:wrap;gap:6px}
+.lp-sug button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 12px;font:500 14px var(--f-body);cursor:pointer;color:var(--ink)}
+.lp-pens{align-self:flex-start;display:flex;gap:5px;padding:12px 14px;background:var(--soft);border-radius:14px}
+.lp-pens i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:lpP 1s infinite}
+.lp-pens i:nth-child(2){animation-delay:.15s} .lp-pens i:nth-child(3){animation-delay:.3s}
+@keyframes lpP{50%{opacity:.25}}
+.lp-in{display:flex;gap:8px;align-items:flex-end;padding:12px;border-top:1px solid var(--line)}
+.lp-in textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:400 16px var(--f-body);max-height:110px;min-height:46px;background:var(--panel);color:var(--ink)}
+.lp-in button{width:52px;height:52px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;flex:none}
+#lp-mic{background:#19B3A6;color:#fff}
+#lp-mic.rec{background:#c2410c;animation:lpRec 1.2s infinite}
+@keyframes lpRec{0%{box-shadow:0 0 0 0 rgb(194 65 12/.6)}100%{box-shadow:0 0 0 14px rgb(194 65 12/0)}}
+#lp-env{background:var(--ink);color:#fff}
+#lp-env:disabled{opacity:.35}
+.lp-oye{font:600 13px var(--f-mono);color:#c2410c;padding:0 14px 6px}
+</style>
+
+<button id="lp-btn" type="button" hidden aria-label="Abrir Lupita"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></span>Lupita</button>
+<section id="lp" hidden aria-label="Lupita">
+  <div class="lp-h"><div><b>Lupita</b><br><small>Asistente del tablero</small></div><span class="sp"></span>
+    <button type="button" id="lp-voz" aria-pressed="true" title="Leer las respuestas en voz alta">🔊</button>
+    <button type="button" id="lp-nueva" title="Empezar una charla nueva">Nueva</button>
+    <button type="button" id="lp-x" aria-label="Cerrar">✕</button></div>
+  <div id="lp-chat" aria-live="polite"></div>
+  <div class="lp-oye" id="lp-oye" hidden>Escuchando… hablá y tocá de nuevo para terminar</div>
+  <form class="lp-in" id="lp-f">
+    <textarea id="lp-txt" rows="1" placeholder="Preguntale algo a Lupita"></textarea>
+    <button type="button" id="lp-mic" aria-label="Hablar" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></button>
+    <button type="submit" id="lp-env" aria-label="Enviar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </form>
+</section>
+
+<script>
+(function(){
+  var charla = [], ocupado = false, voz = true, rec = null, escuchando = false, textoBase = "";
+  try { voz = localStorage.getItem("lupita-voz") !== "no"; } catch(e) {}
+  var chat = $("#lp-chat"), txt = $("#lp-txt");
+  $("#lp-voz").setAttribute("aria-pressed", String(voz));
+
+  /* el botón aparece cuando hay alguien adentro */
+  setInterval(function(){ $("#lp-btn").hidden = !(window.user && token) || !$("#lp").hidden; }, 800);
+
+  function burbuja(cls, t){ var d = document.createElement("div"); d.className = "lp-m " + cls; d.textContent = t; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d; }
+  function bienvenida(){
+    chat.innerHTML = "";
+    burbuja("ella", "Hola" + (window.user ? ", " + user.nombre : "") + ". Soy Lupita. Preguntame cómo viene un trabajo, en qué está alguien o qué hay atrasado. También puedo crear una orden o pasar un trabajo de semana.");
+    var s = document.createElement("div"); s.className = "lp-sug";
+    ["¿Qué hay atrasado?", "¿Qué se entrega esta semana?", "¿En qué está Gabriel?", "¿Cómo viene la semana?"].forEach(function(q){
+      var b = document.createElement("button"); b.type = "button"; b.textContent = q; b.onclick = function(){ enviar(q); }; s.appendChild(b); });
+    chat.appendChild(s);
+  }
+  function hablar(t){
+    if (!voz || !window.speechSynthesis) return;
+    try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(t); u.lang = "es-ES"; u.rate = 1.05;
+      var vs = speechSynthesis.getVoices(), v = vs.filter(function(x){ return /^es[-_](UY|AR)/i.test(x.lang); })[0] || vs.filter(function(x){ return /^es[-_](US|MX|419)/i.test(x.lang); })[0] || vs.filter(function(x){ return /^es/i.test(x.lang); })[0];
+      if (v){ u.voice = v; u.lang = v.lang; } speechSynthesis.speak(u); } catch(e) {}
+  }
+  function pensando(on){ var p = chat.querySelector(".lp-pens"); if (on && !p){ p = document.createElement("div"); p.className = "lp-pens"; p.innerHTML = "<i></i><i></i><i></i>"; chat.appendChild(p); chat.scrollTop = chat.scrollHeight; } if (!on && p) p.remove(); }
+  function limpiarError(m){ return String(m || "").replace(/^.*(PERMISO|Error|SESION):\s*/, "") || "No pude responder. Probá de nuevo."; }
+
+  function enviar(q){
+    q = String(q || "").trim(); if (!q || ocupado) return;
+    if (escuchando) pararMic();
+    var s = chat.querySelector(".lp-sug"); if (s) s.remove();
+    burbuja("yo", q); charla.push({role:"user", text:q}); txt.value = ""; ajustar();
+    ocupado = true; $("#lp-env").disabled = true; pensando(true);
+    run("lupita", token, charla).then(function(r){
+      pensando(false);
+      if (r.usadas && r.usadas.length){ var us = document.createElement("div"); us.className = "lp-us"; us.textContent = r.usadas.join(" · "); chat.appendChild(us); }
+      burbuja("ella", r.texto); charla.push({role:"assistant", text:r.texto}); hablar(r.texto);
+      if (r.pendiente) confirmar(r.pendiente);
+    }).catch(function(e){ pensando(false); var m = e && e.message || String(e); if (/SESION/.test(m)) return manejarError(e); burbuja("err", limpiarError(m)); charla.pop(); })
+      .then(function(){ ocupado = false; $("#lp-env").disabled = false; });
+  }
+  function confirmar(p){
+    var c = document.createElement("div"); c.className = "lp-conf";
+    c.innerHTML = '<p></p><div><button type="button" class="si">Confirmar</button><button type="button" class="no">Cancelar</button></div>';
+    c.querySelector("p").textContent = p.descripcion; chat.appendChild(c); chat.scrollTop = chat.scrollHeight;
+    var si = c.querySelector(".si"), no = c.querySelector(".no");
+    no.onclick = function(){ c.classList.add("hecho"); si.disabled = no.disabled = true; var t = "Listo, no hice nada."; burbuja("ella", t); charla.push({role:"assistant", text:"(El usuario canceló: " + p.descripcion + ")"}); };
+    si.onclick = function(){ si.disabled = no.disabled = true; si.textContent = "Haciendo…";
+      call("lupitaConfirmar", {tool:p.tool, input:p.input}).then(function(r){
+        c.classList.add("hecho"); si.textContent = "Hecho ✓"; var t = r.lupitaTxt || "Listo."; burbuja("ella", t); charla.push({role:"assistant", text:t}); hablar(t);
+      }, function(e){ si.disabled = no.disabled = false; si.textContent = "Confirmar"; burbuja("err", limpiarError(e && e.message)); });
+    };
+  }
+
+  /* micrófono: el navegador pasa la voz a texto (gratis). Dentro del marco de Google no lo dejan usar. */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition, enMarco = false;
+  try { enMarco = window.self !== window.top; } catch(e) { enMarco = true; }
+  if (SR && !enMarco) $("#lp-mic").hidden = false;
+  function pararMic(){ escuchando = false; $("#lp-mic").classList.remove("rec"); $("#lp-oye").hidden = true; try { rec && rec.stop(); } catch(e) {} }
+  $("#lp-mic").onclick = function(){
+    if (escuchando){ pararMic(); return; }
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    rec = new SR(); rec.lang = "es-UY"; rec.interimResults = true; rec.continuous = true;
+    textoBase = txt.value.trim() ? txt.value.trim() + " " : "";
+    var final = "";
+    rec.onresult = function(ev){ var interino = ""; for (var i = ev.resultIndex; i < ev.results.length; i++){ var r = ev.results[i]; if (r.isFinal) final += r[0].transcript; else interino += r[0].transcript; }
+      txt.value = (textoBase + final + interino).replace(/\s+/g, " "); ajustar(); };
+    rec.onerror = function(ev){ pararMic(); if (ev.error === "not-allowed" || ev.error === "service-not-allowed") burbuja("err", "El navegador no deja usar el micrófono. Revisá el permiso del micrófono para esta página."); };
+    rec.onend = function(){ var estaba = escuchando; pararMic(); if (estaba || final) { var q = txt.value.trim(); if (q) enviar(q); } };
+    try { rec.start(); escuchando = true; $("#lp-mic").classList.add("rec"); $("#lp-oye").hidden = false; } catch(e) { burbuja("err", "No pude abrir el micrófono."); }
+  };
+
+  function ajustar(){ txt.style.height = "auto"; txt.style.height = Math.min(110, txt.scrollHeight) + "px"; }
+  txt.addEventListener("input", ajustar);
+  txt.addEventListener("keydown", function(e){ if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); enviar(txt.value); } });
+  $("#lp-f").addEventListener("submit", function(e){ e.preventDefault(); enviar(txt.value); });
+  $("#lp-btn").onclick = function(){ $("#lp").hidden = false; $("#lp-btn").hidden = true; if (!chat.children.length) bienvenida(); setTimeout(function(){ txt.focus(); }, 50); };
+  $("#lp-x").onclick = function(){ $("#lp").hidden = true; pararMic(); if (window.speechSynthesis) speechSynthesis.cancel(); };
+  $("#lp-nueva").onclick = function(){ charla = []; bienvenida(); };
+  $("#lp-voz").onclick = function(){ voz = !voz; this.setAttribute("aria-pressed", String(voz)); if (!voz && window.speechSynthesis) speechSynthesis.cancel(); try { localStorage.setItem("lupita-voz", voz ? "si" : "no"); } catch(e) {} };
 })();
 </script>
 
