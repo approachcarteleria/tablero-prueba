@@ -4,7 +4,7 @@
 <!-- Tablero de producción · página para GitHub Pages. Desarrollado por Bruno Sanz. -->
 <script>
   // ▼ Dirección de la aplicación web de Apps Script (termina en /exec). Es lo único que hay que tocar.
-  window.API_URL = "https://script.google.com/macros/s/AKfycbxCs-z7xfRPRPZwGharYclxESriziHmSSpO-TR5MH5IEdPI-QgxOF7H3vaCbhnPt3yiOg/exec";
+  window.API_URL = "PEGAR_ACA_LA_URL_DE_LA_APLICACION_WEB";
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
@@ -2398,7 +2398,24 @@ if (token) load(); else mostrarLogin();
 <style>
 #lp-btn{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:center;gap:10px;
   background:var(--ink);color:#fff;border:0;border-radius:999px;padding:12px 20px 12px 14px;font:700 20px var(--f-display);text-transform:uppercase;letter-spacing:.06em;cursor:pointer;box-shadow:0 8px 24px rgb(0 0 0/.25)}
-#lp-btn .ic{width:34px;height:34px;border-radius:50%;background:#19B3A6;display:grid;place-items:center}
+#lp-btn .ic{width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center}
+#lp-btn .ic .lp-av{width:40px;height:40px}
+#lp-btn{padding:7px 20px 7px 7px}
+/* la cara de Lupita y sus gestos */
+.lp-av .ojos{transform-box:fill-box;transform-origin:center;animation:lpParpadeo 4.6s infinite}
+@keyframes lpParpadeo{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.12)}}
+.lp-av .mirada{transition:transform .25s}
+.lp-av .boca2{opacity:0}
+.lp-av .vidrio{transition:fill .2s}
+.lp-cara.piensa .mirada{transform:translate(4px,-6px)}
+.lp-cara.oye .vidrio{animation:lpOye 1s infinite alternate}
+@keyframes lpOye{to{fill:#8fdcd2}}
+.lp-cara.habla .boca{animation:lpBocaA .32s infinite alternate}
+.lp-cara.habla .boca2{animation:lpBocaB .32s infinite alternate}
+@keyframes lpBocaA{to{opacity:0}} @keyframes lpBocaB{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.lp-av .ojos,.lp-cara.oye .vidrio,.lp-cara.habla .boca,.lp-cara.habla .boca2{animation:none}}
+.lp-h .lp-cara{width:52px;height:52px;flex:none}
+.lp-h .lp-cara .lp-av{width:52px;height:52px}
 #lp-btn:focus-visible{outline:3px solid #19B3A6;outline-offset:3px}
 body.pantalla #lp-btn{display:none}
 #lp{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:61;width:min(430px,calc(100vw - 24px));height:min(640px,calc(100vh - 36px));
@@ -2439,14 +2456,14 @@ body.pantalla #lp-btn{display:none}
 .lp-oye{font:600 13px var(--f-mono);color:#c2410c;padding:0 14px 6px}
 </style>
 
-<button id="lp-btn" type="button" hidden aria-label="Abrir Lupita"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></span>Lupita</button>
+<button id="lp-btn" type="button" hidden aria-label="Abrir Lupita"><span class="ic lp-cara"><svg class="lp-av" viewBox="0 0 120 120" aria-hidden="true"><path d="M78 80 L104 108" stroke="#1b1b1b" stroke-width="15" stroke-linecap="round"/><circle class="vidrio" cx="52" cy="50" r="40" fill="#d9f4f1" stroke="#1b1b1b" stroke-width="9"/><path d="M28 34 A28 28 0 0 1 44 22" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none"/><g class="mirada"><g class="ojos"><rect x="37" y="38" width="8" height="17" rx="4" fill="#1b1b1b"/><rect x="59" y="38" width="8" height="17" rx="4" fill="#1b1b1b"/></g></g><path class="boca" d="M40 63 Q52 74 64 63" stroke="#1b1b1b" stroke-width="4.5" stroke-linecap="round" fill="none"/><ellipse class="boca2" cx="52" cy="66" rx="7" ry="5.5" fill="#1b1b1b"/></svg></span>Lupita</button>
 <section id="lp" hidden aria-label="Lupita">
-  <div class="lp-h"><div><b>Lupita</b><br><small>Asistente del tablero</small></div><span class="sp"></span>
+  <div class="lp-h"><span class="lp-cara" id="lp-cara"><svg class="lp-av" viewBox="0 0 120 120" aria-hidden="true"><path d="M78 80 L104 108" stroke="#1b1b1b" stroke-width="15" stroke-linecap="round"/><circle class="vidrio" cx="52" cy="50" r="40" fill="#d9f4f1" stroke="#1b1b1b" stroke-width="9"/><path d="M28 34 A28 28 0 0 1 44 22" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none"/><g class="mirada"><g class="ojos"><rect x="37" y="38" width="8" height="17" rx="4" fill="#1b1b1b"/><rect x="59" y="38" width="8" height="17" rx="4" fill="#1b1b1b"/></g></g><path class="boca" d="M40 63 Q52 74 64 63" stroke="#1b1b1b" stroke-width="4.5" stroke-linecap="round" fill="none"/><ellipse class="boca2" cx="52" cy="66" rx="7" ry="5.5" fill="#1b1b1b"/></svg></span><div><b>Lupita</b><br><small>Tu asistente</small></div><span class="sp"></span>
     <button type="button" id="lp-voz" aria-pressed="true" title="Leer las respuestas en voz alta">🔊</button>
     <button type="button" id="lp-nueva" title="Empezar una charla nueva">Nueva</button>
     <button type="button" id="lp-x" aria-label="Cerrar">✕</button></div>
   <div id="lp-chat" aria-live="polite"></div>
-  <div class="lp-oye" id="lp-oye" hidden>Escuchando… hablá y tocá de nuevo para terminar</div>
+  <div class="lp-oye" id="lp-oye" hidden>Escuchando… hablá tranquilo: cuando hagas una pausa, se manda solo</div>
   <form class="lp-in" id="lp-f">
     <textarea id="lp-txt" rows="1" placeholder="Preguntale algo a Lupita"></textarea>
     <button type="button" id="lp-mic" aria-label="Hablar" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></button>
@@ -2464,10 +2481,16 @@ body.pantalla #lp-btn{display:none}
   /* el botón aparece cuando hay alguien adentro */
   setInterval(function(){ $("#lp-btn").hidden = !(window.user && token) || !$("#lp").hidden; }, 800);
 
+  function gesto(g){ [].forEach.call(document.querySelectorAll(".lp-cara"), function(c){ c.classList.remove("oye", "piensa", "habla"); if (g) c.classList.add(g); }); }
   function burbuja(cls, t){ var d = document.createElement("div"); d.className = "lp-m " + cls; d.textContent = t; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d; }
   function bienvenida(){
     chat.innerHTML = "";
-    burbuja("ella", "Hola" + (window.user ? ", " + user.nombre : "") + ". Soy Lupita. Preguntame cómo viene un trabajo, en qué está alguien o qué hay atrasado. También puedo crear una orden o pasar un trabajo de semana.");
+    var saludo = "¡Hola" + (window.user ? ", " + user.nombre : "") + "! ¿En qué te puedo ayudar?";
+    burbuja("ella", saludo);
+    var hoyK = new Date().toDateString(), ya = "";
+    try { ya = localStorage.getItem("lupita-saludo"); localStorage.setItem("lupita-saludo", hoyK); } catch(e) {}
+    if (ya !== hoyK) hablar(saludo); // en voz alta, solo la primera vez del día
+    burbuja("ella", "Preguntame cómo viene un trabajo, en qué está alguien o qué hay atrasado. También puedo crear una orden o pasar un trabajo de semana.");
     var s = document.createElement("div"); s.className = "lp-sug";
     ["¿Qué hay atrasado?", "¿Qué se entrega esta semana?", "¿En qué está Gabriel?", "¿Cómo viene la semana?"].forEach(function(q){
       var b = document.createElement("button"); b.type = "button"; b.textContent = q; b.onclick = function(){ enviar(q); }; s.appendChild(b); });
@@ -2477,9 +2500,11 @@ body.pantalla #lp-btn{display:none}
     if (!voz || !window.speechSynthesis) return;
     try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(t); u.lang = "es-ES"; u.rate = 1.05;
       var vs = speechSynthesis.getVoices(), v = vs.filter(function(x){ return /^es[-_](UY|AR)/i.test(x.lang); })[0] || vs.filter(function(x){ return /^es[-_](US|MX|419)/i.test(x.lang); })[0] || vs.filter(function(x){ return /^es/i.test(x.lang); })[0];
-      if (v){ u.voice = v; u.lang = v.lang; } speechSynthesis.speak(u); } catch(e) {}
+      if (v){ u.voice = v; u.lang = v.lang; }
+      u.onstart = function(){ gesto("habla"); }; u.onend = u.onerror = function(){ gesto(""); };
+      speechSynthesis.speak(u); } catch(e) {}
   }
-  function pensando(on){ var p = chat.querySelector(".lp-pens"); if (on && !p){ p = document.createElement("div"); p.className = "lp-pens"; p.innerHTML = "<i></i><i></i><i></i>"; chat.appendChild(p); chat.scrollTop = chat.scrollHeight; } if (!on && p) p.remove(); }
+  function pensando(on){ gesto(on ? "piensa" : ""); var p = chat.querySelector(".lp-pens"); if (on && !p){ p = document.createElement("div"); p.className = "lp-pens"; p.innerHTML = "<i></i><i></i><i></i>"; chat.appendChild(p); chat.scrollTop = chat.scrollHeight; } if (!on && p) p.remove(); }
   function limpiarError(m){ return String(m || "").replace(/^.*(PERMISO|Error|SESION):\s*/, "") || "No pude responder. Probá de nuevo."; }
 
   function enviar(q){
@@ -2513,18 +2538,30 @@ body.pantalla #lp-btn{display:none}
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition, enMarco = false;
   try { enMarco = window.self !== window.top; } catch(e) { enMarco = true; }
   if (SR && !enMarco) $("#lp-mic").hidden = false;
-  function pararMic(){ escuchando = false; $("#lp-mic").classList.remove("rec"); $("#lp-oye").hidden = true; try { rec && rec.stop(); } catch(e) {} }
+  function pararMic(){ escuchando = false; gesto(""); $("#lp-mic").classList.remove("rec"); $("#lp-oye").hidden = true; try { rec && rec.stop(); } catch(e) {} }
   $("#lp-mic").onclick = function(){
     if (escuchando){ pararMic(); return; }
     if (window.speechSynthesis) speechSynthesis.cancel();
-    rec = new SR(); rec.lang = "es-UY"; rec.interimResults = true; rec.continuous = true;
+    // Una frase por vez: en Android el modo continuo repite lo ya dicho ("LupitaLupita cargado…").
+    // Cuando hacés una pausa, se corta solo y se manda.
+    rec = new SR(); rec.lang = "es-UY"; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
     textoBase = txt.value.trim() ? txt.value.trim() + " " : "";
-    var final = "";
-    rec.onresult = function(ev){ var interino = ""; for (var i = ev.resultIndex; i < ev.results.length; i++){ var r = ev.results[i]; if (r.isFinal) final += r[0].transcript; else interino += r[0].transcript; }
-      txt.value = (textoBase + final + interino).replace(/\s+/g, " "); ajustar(); };
-    rec.onerror = function(ev){ pararMic(); if (ev.error === "not-allowed" || ev.error === "service-not-allowed") burbuja("err", "El navegador no deja usar el micrófono. Revisá el permiso del micrófono para esta página."); };
-    rec.onend = function(){ var estaba = escuchando; pararMic(); if (estaba || final) { var q = txt.value.trim(); if (q) enviar(q); } };
-    try { rec.start(); escuchando = true; $("#lp-mic").classList.add("rec"); $("#lp-oye").hidden = false; } catch(e) { burbuja("err", "No pude abrir el micrófono."); }
+    var oido = "";
+    rec.onresult = function(ev){
+      var partes = [];
+      for (var i = 0; i < ev.results.length; i++){ // algunos celulares mandan cada pedazo con todo lo anterior: se queda con el más completo
+        var t = String(ev.results[i][0].transcript || "").trim(); if (!t) continue;
+        var prev = partes[partes.length - 1], tl = t.toLowerCase(), pl = prev ? prev.toLowerCase() : "";
+        if (prev && tl.indexOf(pl) === 0) partes[partes.length - 1] = t;
+        else if (!(prev && pl.indexOf(tl) === 0)) partes.push(t);
+      }
+      oido = partes.join(" ");
+      txt.value = (textoBase + oido).replace(/\s+/g, " "); ajustar(); };
+    rec.onerror = function(ev){ pararMic();
+      if (ev.error === "not-allowed" || ev.error === "service-not-allowed") burbuja("err", "El navegador no deja usar el micrófono. Revisá el permiso del micrófono para esta página.");
+      else if (ev.error === "no-speech") burbuja("err", "No te escuché. Tocá el micrófono y hablá un poco más cerca."); };
+    rec.onend = function(){ pararMic(); var q = txt.value.trim(); if (oido && q) enviar(q); };
+    try { rec.start(); escuchando = true; gesto("oye"); $("#lp-mic").classList.add("rec"); $("#lp-oye").hidden = false; } catch(e) { burbuja("err", "No pude abrir el micrófono."); }
   };
 
   function ajustar(){ txt.style.height = "auto"; txt.style.height = Math.min(110, txt.scrollHeight) + "px"; }
